@@ -3,6 +3,7 @@ package dsa.eetac.upc.edu;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +37,14 @@ public class Recycler extends RecyclerView.Adapter<Recycler.ViewHolder> {
 
     //Asign the text TextView to the text1 in the layout
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private LinearLayout linearLayout;
+        private ConstraintLayout constraintLayout;
         private TextView nomMunicipiView;
         private TextView ineMunicipiView;
         private ImageView escutMuncipi;
 
         public ViewHolder(View v) {
             super(v);
-            linearLayout = v.findViewById(R.id.linearLayout);
+            constraintLayout = v.findViewById(R.id.constraintLayout);
             nomMunicipiView = v.findViewById(R.id.nomMunicipi);
             ineMunicipiView = v.findViewById(R.id.numeroIne);
             escutMuncipi = v.findViewById(R.id.escutMunicipi);
@@ -64,14 +67,11 @@ public class Recycler extends RecyclerView.Adapter<Recycler.ViewHolder> {
     @Override
     public void onBindViewHolder(Recycler.ViewHolder holder, int position) {
         Element element = data.get(position);
-        holder.
-    }
+        holder.ineMunicipiView.setText(element.getIne());
+        holder.nomMunicipiView.setText(element.getMunicipiNom());
 
-    /*public void clear(){
-        final int size = data.size();
-        data.clear();
-        notifyItemRangeRemoved(0, size);
-    }*/
+        Picasso.with(context).load(element.getMunicipiEscut()).into(holder.escutMuncipi);
+    }
 
     @Override
     public  int getItemCount() {
