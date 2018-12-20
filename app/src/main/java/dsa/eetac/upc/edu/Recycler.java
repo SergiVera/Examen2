@@ -25,8 +25,6 @@ import retrofit2.Response;
 
 public class Recycler extends RecyclerView.Adapter<Recycler.ViewHolder> {
 
-    //public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-
     private Context context;
     private List<Element> data;
 
@@ -71,6 +69,7 @@ public class Recycler extends RecyclerView.Adapter<Recycler.ViewHolder> {
         holder.nomMunicipiView.setText(element.getMunicipiNom());
 
         Picasso.with(context).load(element.getMunicipiEscut()).into(holder.escutMuncipi);
+
     }
 
     @Override

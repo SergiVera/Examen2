@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData() {
-        Call<Cities> elementCall = myapirest.getData();
+        Call<Cities> elementCall = myapirest.getData(1,15);
 
         elementCall.enqueue(new Callback<Cities>() {
             @Override
@@ -76,11 +76,11 @@ public class MainActivity extends AppCompatActivity {
 
                     for(int i = 0; i<elementList.size(); i++){
                         Log.i("Nom municipi: " + elementList.get(i).getMunicipiNom(), response.message());
+                        Log.i("Escut municipi: " + elementList.get(i).getMunicipiEscut(), response.message());
                     }
 
-                    if(elementList.size() != 0){
-                        recycler.addElements(elementList);
-                    }
+                    recycler.addElements(elementList);
+
 
                     progressDialog.hide();
                 } else {
