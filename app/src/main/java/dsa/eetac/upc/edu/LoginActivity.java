@@ -335,14 +335,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
 
-            final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putBoolean("registred", true);
-            editor.putString("username", this.mEmail);
-            editor.putString("password", this.mPassword);
-            editor.apply();
-
             if (success) {
+                final SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean("registred", true);
+                editor.putString("username", this.mEmail);
+                editor.putString("password", this.mPassword);
+                editor.apply();
+
                 newIntent();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

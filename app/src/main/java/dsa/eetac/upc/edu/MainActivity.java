@@ -5,10 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +50,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getIne() {
-        Call<Element> elementCall = myapirest.getIne();
+        Call<Cities> elementCall = myapirest.getData();
+
+        elementCall.enqueue(new Callback<Cities>() {
+            @Override
+            public void onResponse(Call<Cities> call, Response<Cities> response) {
+                if(response.isSuccessful()){
+                    Cities cities = response.body();
+
+                    List<Element> elementList = cities.getElements();
+
+                    for(int i = 0; i<elementList.size(); i++){
+                        Log.i("Nom municipi: " + elementList.get(i).getMunicipiNom(), response.message());
+                    }
+
+                    if(elementList.size() != 0){
+                        recycler.addElements(elementList);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cities> call, Throwable t) {
+
+            }
+        });
     }
 }
